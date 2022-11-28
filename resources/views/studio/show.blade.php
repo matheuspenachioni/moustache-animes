@@ -1,14 +1,19 @@
 @extends('base')
 
 @section('content')
-    <div class=" text-center">
-        <h2>{{ $studio->name }}</h2>
-        <h4>{{ $studio->description }}</h4>
-        <h4>{{ $studio->established }}</h4>
-
+    <div class=" row">
         <div class="col-md-4 mx-auto">
             <img src="{{ URL::to('/' . $studio->image) }}" class="img-fluid rounded-start" alt="">
         </div>
+        <div class="col">
+            <h2>{{ $studio->name }}</h2>
+            <p><strong>Description:</strong> {{ $studio->description }}</p>
+            <p><strong>Established:</strong> {{ $studio->established }}</p>
+        </div>
     </div>
-    <a href="{{ route('animes.index') }}">Back to home</a>
+    <div class="row">
+        <div class="text-center">
+            <a class="btn btn-primary" href="{{ route('studios.edit', $studio->id) }}">Edit</a>
+        </div>
+    </div>
 @endsection

@@ -16,11 +16,28 @@
                 </div>
                 @enderror
             </div>
+            <div class="mb-2 col-6 mx-auto">
+                <label for="description" class="form-label fw-bold">Description</label>
+                <textarea type="text" class="form-control" name="description" id="description">{{ old('description') ? old('description') : $studio->description }}</textarea>
+                @error('description')
+                <div class="text-danger">
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
+            <div class="mb-2 col-6 mx-auto">
+                <label for="established" class="form-label fw-bold">Established</label>
+                <input type="input" class="form-control" name="established" id="established" value="{{ old('established') ? old('established') : $studio->established }}">
+                @error('established')
+                <div class="text-danger">
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
             <div class="text-center my-4 col-6 mx-auto">
                 <input type="submit" class="btn btn-outline-primary" value="Submit">
                 <input type="reset" class="btn btn-outline-danger" value="Clear">
             </div>
         </form>
     </div>
-    {{ dd($studio) }}
 @endsection

@@ -33,7 +33,7 @@
                                     <li class="nav-item">
                                         <small class="text-primary">
                                             {{-- form to delete the resource --}}
-                                            <form action="{{ route('animes.destroy', $a->id) }}" method="post">
+                                            <form action="{{ route('animes.destroy', $anime->id) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
                                                 <input class="btn btn-outline-danger" type="submit" value="Delete">

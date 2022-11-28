@@ -1,0 +1,26 @@
+a {
+    color: blue;
+    text-decoration: none;
+}
+
+.card-maior {
+    transition: 200ms ease-in-out;
+}
+
+.card-maior:hover {
+    transform: scale(1.07);
+    box-shadow: 0px 5px 11px 0px #b1b1b1;
+}
+
+.content {
+    min-height: 74vh;
+}
+
+.img-banner {
+    transition: 200ms ease-in-out;
+}
+
+.card-maior:hover .img-banner {
+    transform: translate(-20% , -5%);
+    box-shadow: 0px 5px 11px 0px #868686;
+}

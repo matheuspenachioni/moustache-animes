@@ -86,11 +86,11 @@ class AnimeController extends Controller
      */
     public function edit($id)
     {
-        $a = Anime::find($id);
+        $anime = Anime::find($id);
 
         $studios = StudioController::getStudios();
 
-        return view('anime.edit')->with('anime', $a)->with('studios', $studios);
+        return view('anime.edit')->with('anime', $anime)->with('studios', $studios);
     }
 
     /**
@@ -104,15 +104,15 @@ class AnimeController extends Controller
     {
         $request->validate($this->getRules());
         
-        $a = Anime::find($id);
+        $anime = Anime::find($id);
     
-        $a->title = $request->input('title');
-        $a->synopsis = $request->input('synopsis');
-        $a->episodes = $request->input('episodes');
-        $a->source = $request->input('source');
-        $a->studio_id = $request->input('studio');
+        $anime->title = $request->input('title');
+        $anime->synopsis = $request->input('synopsis');
+        $anime->episodes = $request->input('episodes');
+        $anime->source = $request->input('source');
+        $anime->studio_id = $request->input('studio');
         
-        $a->save();
+        $anime->save();
         
         return redirect(route('animes.index'));
     }

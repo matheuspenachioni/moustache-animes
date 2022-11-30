@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Studio;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class StudioController extends Controller
 {
@@ -14,7 +16,9 @@ class StudioController extends Controller
      */
     public function index()
     {
-        //
+        $studios = Studio::all();
+
+        return view('studio.index')->with('studios', $studios);
     }
 
     /**
@@ -43,13 +47,12 @@ class StudioController extends Controller
         $studio->established = $request->input('established');
 
         if($request->image){
-            $path = $request->image->store('');
-            $studio->image = "images/" . $path;
+            $studio->image = $request->image->store('images');
          }
 
         $studio->save();
 
-        return redirect(route('animes.index'));
+        return redirect(route('studios.index'));
     }
 
     /**
@@ -98,6 +101,14 @@ class StudioController extends Controller
         $studio->name = $request->input('name');
         $studio->description = $request->input('description');
         $studio->established = $request->input('established');
+
+        if($request->image){
+            if($studio->image && Storage::exists($studio->image)){
+                Storage::delete($studio->image);
+            }
+
+            $studio->image = $request->image->store('images');
+         }
         
         $studio->save();
         
@@ -112,7 +123,11 @@ class StudioController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $studio = Studio::find($id);
+        
+        $studio->delete();
+        
+        return redirect(route('studios.index'));
     }
 
     public static function getStudios(){

@@ -48,8 +48,7 @@ class AnimeController extends Controller
         $anime->synopsis = $request->input('synopsis');
 
         if($request->image){
-            $path = $request->image->store('');
-            $anime->image = "images/" . $path;
+            $anime->image = $request->image->store('images');
          }
 
         $anime->episodes = $request->input('episodes');
@@ -108,6 +107,15 @@ class AnimeController extends Controller
     
         $anime->title = $request->input('title');
         $anime->synopsis = $request->input('synopsis');
+
+        if($request->image){
+            if($anime->image && Storage::exists($anime->image)){
+                Storage::delete($anime->image);
+            }
+
+            $anime->image = $request->image->store('images');
+         }
+
         $anime->episodes = $request->input('episodes');
         $anime->source = $request->input('source');
         $anime->studio_id = $request->input('studio');
@@ -127,6 +135,7 @@ class AnimeController extends Controller
     {
         $anime = Anime::find($id);
         
+        Storage::delete($anime->image);
         $anime->delete();
         
         return redirect(route('animes.index'));
@@ -136,6 +145,7 @@ class AnimeController extends Controller
         $rules = [
             'title' => 'required|max:100',
             'synopsis' => 'required|max:400',
+            'image' => 'required|mimes:jpg, jpeg, png',
             'episodes' => 'required|numeric',
             'source' => 'required|max:30' 
         ];
@@ -146,6 +156,7 @@ class AnimeController extends Controller
         $msg = [
             'title.*' => 'Digite o título da obra! Permitido até 50 caracteres',
             'synopsis.*' => 'Digite uma sinopse! Permitido até 400 caracteres',
+            'image.*' => 'Apenas o formato jpg, jpeg e png são suportados',
             'episodes.*' => 'Digite o total de episódios! Permitido até 4 dígitos',
             'source.*' => 'Digite a fonte da obra! Permitido até 30 caracteres'
         ];

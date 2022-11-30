@@ -4,7 +4,7 @@
     <h2 class="text-center">Updating anime</h2>
     <hr>
     <div class="row">
-        <form method="POST" action="{{ route('animes.update', $anime->id) }}">
+        <form method="POST" action="{{ route('animes.update', $anime->id) }}" enctype="multipart/form-data">
             @csrf
             @method("PUT")
             <div class="mb-2 col-6 mx-auto">
@@ -20,6 +20,15 @@
                 <label for="synopsis" class="form-label fw-bold">Synopsis</label>
                 <textarea type="text" class="form-control" name="synopsis" id="synopsis">{{ old('synopsis') ? old('synopsis') : $anime->synopsis }}</textarea>
                 @error('synopsis')
+                <div class="text-danger">
+                    {{ $message }}
+                </div>
+                @enderror 
+            </div>
+            <div class="mb-2 col-6 mx-auto">
+                <label for="image" class="form-label fw-bold">Image</label>
+                <input type="file" class="form-control" name="image" id="image">
+                @error('image')
                 <div class="text-danger">
                     {{ $message }}
                 </div>

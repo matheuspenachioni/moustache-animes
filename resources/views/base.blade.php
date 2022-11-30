@@ -20,6 +20,9 @@
                         <li class="nav-item active">
                             <a class="nav-link {{{ Route::current()->getName() == 'animes.index' ? 'active' : '' }}}" href="{{ route('animes.index') }}">Animes</a>
                         </li>
+                        <li class="nav-item active">
+                            <a class="nav-link {{{ Route::current()->getName() == 'studios.index' ? 'active' : '' }}}" href="{{ route('studios.index') }}">Studios</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link {{{ Route::current()->getName() == 'animes.create' ? 'active' : '' }}}" href="{{ route('animes.create') }}">New Anime</a>
                         </li>

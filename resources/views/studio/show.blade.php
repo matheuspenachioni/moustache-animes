@@ -3,7 +3,7 @@
 @section('content')
     <div class=" row">
         <div class="col-md-4 mx-auto">
-            <img src="{{ URL::to('/' . $studio->image) }}" class="img-fluid rounded-start" alt="">
+            <img src="{{ url("storage/{$studio->image}") }}" class="img-fluid rounded-start" alt="">
         </div>
         <div class="col">
             <h2>{{ $studio->name }}</h2>

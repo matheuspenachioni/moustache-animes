@@ -13,14 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('animes', function (Blueprint $table) {
+        Schema::create('anime_user', function (Blueprint $table) {
             $table->id();
-            $table->string("title", 100);
-            $table->string("synopsis", 400);
-            $table->string('image');
-            $table->integer('watched');
-            $table->integer("episodes");
-            $table->string("source", 30);
+            $table->foreignId('anime_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('animes');
+        Schema::dropIfExists('anime_user');
     }
 };

@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AnimeController;
 use App\Http\Controllers\StudioController;
+use App\Http\Controllers\StatusController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,8 +30,15 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::get('/animes/decrement/{id}', [AnimeController::class, 'decrementWatched']);
+    Route::get('/animes/increment/{id}', [AnimeController::class, 'incrementWatched']);
+    Route::get('/animes/add/{id}', [AnimeController::class, 'addToUserList'])->middleware('auth');
+    Route::get('/animes/remove/{id}', [AnimeController::class, 'removeFromUserList'])->middleware('auth');
+    Route::get('/animes/my-list', [AnimeController::class, 'userList'])->name('animes.user_list')->middleware('auth');
     Route::resource("/animes", AnimeController::class);
+
     Route::resource("/studios", StudioController::class);
+    Route::resource("/status", StatusController::class);
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

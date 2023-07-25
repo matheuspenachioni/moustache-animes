@@ -5,8 +5,6 @@
 @section('content')
     @if (!is_null($animes))
         <div class="row mx-auto">
-            {{ session('success') }}
-            {{ session('error') }}
             @foreach ($animes as $anime)
                 <div class="card card-maior col-lg-6 col-sm-12 mx-auto my-4 px-0" style="max-width: 540px;">
                     <div class="row g-0">
@@ -20,26 +18,22 @@
                                     <span class="badge {{ $anime->statu->name == 'Completo' ? 'text-bg-success' : 'text-bg-secondary'}}" href="">{{ $anime->statu->name }}</span>
                                 </p>
                                 <p class="card-text">
+                                    <a href="{{ url('/animes/decrement/' . $anime->id) }}" class="{{ $anime->watched == 0 ? 'disabled-link' : ''}}"><i class="fa-solid fa-circle-minus text-danger"></i></a> 
+                                    <span class="fw-bold">{{ $anime->watched }} </span>
+                                    <a href="{{ url('/animes/increment/' . $anime->id) }}" class="{{ $anime->watched == $anime->episodes ? 'disabled-link' : ''}}"><i class="fa-solid fa-circle-plus text-primary"></i></a> 
+                                    de <span class="fw-bold">{{ $anime->episodes }}</span> episódios assistidos
+                                </p>
+                                <p class="card-text">
                                     Estúdio: <a class="link-studio" href="{{ route('studios.show', $anime->studio->id) }}">{{ $anime->studio->name }}</a>
                                 </p>
-                                <a href="{{ url('/animes/add/' . $anime->id) }}">Adicionar à minha lista</a>
                                 <p class="card-text">
                                 <ul class="nav justify-content-center">
                                     <li class="nav-item">
                                         <small class="text-primary"><a href="{{ route('animes.show', $anime->id) }}"
                                                 class="button-18">Detalhes</a></small>
-                                    </li>&nbsp;
-                                    <li class="nav-item">
-                                        <small class="text-primary">
-                                            {{-- form to delete the resource --}}
-                                            <form action="{{ route('animes.destroy', $anime->id) }}" method="post">
-                                                @csrf
-                                                @method('DELETE')
-                                                <input class="button-18" type="submit" value="Remover">
-                                            </form>
-                                        </small>
                                     </li>
                                 </ul>
+                                <a href="{{ url('/animes/remove/' . $anime->id) }}">Remover da minha lista</a>
                                 </p>
                             </div>
                         </div>

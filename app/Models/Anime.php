@@ -12,16 +12,26 @@ class Anime extends Model
     protected $fillable = [
         'title',
         'synopsis',
+        'watched',
         'episodes',
         'source'
     ];
 
     //..eager loading 
-    protected $with = ['studio'];
+    protected $with = ['studio', 'statu'];
 
     //..define the relationship with Studio
     public function studio(){
         return $this->belongsTo(Studio::class);
+    }
+
+    //..define the relationship with Studio
+    public function statu(){
+        return $this->belongsTo(Status::class);
+    }
+
+    public function users(){
+        return $this->belongsToMany(User::class);
     }
 
 }

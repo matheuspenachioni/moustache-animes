@@ -35,6 +35,15 @@
                 @enderror
             </div>
             <div class="mb-2 col-6 mx-auto">
+                <label for="watched" class="form-label fw-bold">Assistidos:</label>
+                <input type="number" class="form-control" name="watched" id="watched" value="{{ old('watched') }}">
+                @error('watched')
+                <div class="text-danger">
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
+            <div class="mb-2 col-6 mx-auto">
                 <label for="episodes" class="form-label fw-bold">Episodes:</label>
                 <input type="number" class="form-control" name="episodes" id="episodes" value="{{ old('episodes') }}">
                 @error('episodes')
@@ -58,6 +67,16 @@
                     @if($studios)
                         @foreach ($studios as $studio)
                             <option value="{{$studio->id}}">{{ $studio->name }}</option>
+                        @endforeach
+                    @endif
+                </select>
+            </div>
+            <div class="mb-2 col-6 mx-auto">
+                <label for="statu" class="form-label fw-bold">Status</label>
+                <select class="form-select" name="statu" id="statu">
+                    @if($status)
+                        @foreach ($status as $statu)
+                            <option value="{{$statu->id}}">{{ $statu->name }}</option>
                         @endforeach
                     @endif
                 </select>

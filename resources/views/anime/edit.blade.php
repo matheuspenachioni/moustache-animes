@@ -64,6 +64,17 @@
                     @endif
                 </select>
             </div>
+            <div class="mb-2 col-6 mx-auto">
+                <label for="studio" class="form-label fw-bold">Status</label>
+                <select class="form-select" name="statu" id="statu">
+                    @if($studios)
+                        @foreach ($status as $statu)
+                            <option {{ $anime->statu_id == $statu->id ? 'selected' : ''  }}   
+                                value="{{ $statu->id }}">{{ $statu->name }}</option>
+                        @endforeach
+                    @endif
+                </select>
+            </div>
             <div class="text-center my-4 col-6 mx-auto">
                 <input type="submit" class="btn btn-outline-primary" value="Submit">
                 <input type="reset" class="btn btn-outline-danger" value="Clear">

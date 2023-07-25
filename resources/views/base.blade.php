@@ -18,26 +18,29 @@
                 <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item active">
+                            <a class="nav-link {{{ Route::current()->getName() == 'animes.user_list' ? 'active' : '' }}}" href="{{ route('animes.user_list') }}">Minha lista</a>
+                        </li>
+                        <li class="nav-item active">
                             <a class="nav-link {{{ Route::current()->getName() == 'animes.index' ? 'active' : '' }}}" href="{{ route('animes.index') }}">Animes</a>
                         </li>
                         <li class="nav-item active">
-                            <a class="nav-link {{{ Route::current()->getName() == 'studios.index' ? 'active' : '' }}}" href="{{ route('studios.index') }}">Studios</a>
+                            <a class="nav-link {{{ Route::current()->getName() == 'studios.index' ? 'active' : '' }}}" href="{{ route('studios.index') }}">Estúdios</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link {{{ Route::current()->getName() == 'status.index' ? 'active' : '' }}}" href="{{ route('status.index') }}">Status</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{{ Route::current()->getName() == 'animes.create' ? 'active' : '' }}}" href="{{ route('animes.create') }}">New Anime</a>
+                            <a class="nav-link {{{ Route::current()->getName() == 'animes.create' ? 'active' : '' }}}" href="{{ route('animes.create') }}">Novo Anime</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{{ Route::current()->getName() == 'studios.create' ? 'active' : '' }}}" href="{{ route('studios.create') }}">New Studio</a>
+                            <a class="nav-link {{{ Route::current()->getName() == 'studios.create' ? 'active' : '' }}}" href="{{ route('studios.create') }}">Novo Estúdio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{{ Route::current()->getName() == 'status.create' ? 'active' : '' }}}" href="{{ route('status.create') }}">Novo Status</a>
                         </li>
                     </ul>
                 </div>
                 <div class="mx-auto order-0">
-                    <a class="navbar-brand mx-auto" href="#">
-                                Welcome back, 
-                                <?php 
-                                    $user = auth()->user()->name; print_r($user);
-                                ?>
-                    </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".dual-collapse2">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -48,7 +51,7 @@
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf
                                 <button type="submit" class="btn btn-danger" href="#">
-                                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                                    <i class="fa-solid fa-right-from-bracket"></i> Sair
                                 </button>
                             </form>
                         </li>
@@ -57,6 +60,9 @@
             </div>
         </nav>
         <div class="content mt-4">
+            <h2>Bem-vindo, <?php $user = auth()->user()->name; print_r($user); ?></h2>
+            <h6 class="text-muted">Você pode adicionar <strong>animes</strong> em sua lista e marcar quantos episódios já assistiu.</h6>
+            <hr>
             {{-- code injection here... --}}
             @yield('content')
         </div>

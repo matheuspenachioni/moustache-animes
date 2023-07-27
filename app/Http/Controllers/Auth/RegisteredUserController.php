@@ -39,10 +39,20 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        $avatar = $request->input('imagebase64');
+        $image_parts = explode(";base64,", $avatar);
+        $image_type_aux = explode("image/", $image_parts[0]);
+        $image_base64 = base64_decode($image_parts[1]);
+        $image_name = time(). '.' . $image_type_aux[1];
+
+        $file = public_path('/storage/images/') . $image_name;
+        file_put_contents($file, $image_base64);
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'avatar' => $image_name,
         ]);
 
         event(new Registered($user));

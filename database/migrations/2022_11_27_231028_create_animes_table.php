@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('animes', function (Blueprint $table) {
             $table->id();
-            $table->string("title", 100);
-            $table->string("synopsis", 400);
+            $table->string("title", 300);
+            $table->string("synopsis", 6000);
             $table->string('image');
-            $table->integer('watched');
+            $table->decimal('score', 4, 2);
             $table->integer("episodes");
             $table->string("source", 30);
             $table->timestamps();

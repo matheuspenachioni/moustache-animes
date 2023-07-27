@@ -12,7 +12,7 @@ class Anime extends Model
     protected $fillable = [
         'title',
         'synopsis',
-        'watched',
+        'score',
         'episodes',
         'source'
     ];
@@ -32,6 +32,11 @@ class Anime extends Model
 
     public function users(){
         return $this->belongsToMany(User::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 
 }

@@ -9,11 +9,7 @@ use Illuminate\Support\Facades\Storage;
 
 class StatusController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    /* Página que lista todos os Status */
     public function index()
     {
         $status = Status::all();
@@ -21,57 +17,27 @@ class StatusController extends Controller
         return view('status.index')->with('status', $status);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    /* Página com o formulário para um novo Status */
     public function create()
     {
         return view('status.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    /* Método para persistência de dados */
     public function store(Request $request)
     {
         $request->validate($this->getRules());
 
-        $statu = new Status();
-        $statu->name = $request->input('name');
-        $statu->description = $request->input('description');
-        $statu->save();
+        $status = new Status();
+        $status->name = $request->input('name');
+        $status->color = $request->input('color');
+        $status->description = $request->input('description');
+        $status->save();
 
         return redirect(route('status.index'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $status = Status::find($id);
-
-        if ($status) {
-            return view('status.show')->with('status', $status);
-        } else {
-            return abort(404);
-        }
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    /* Página com o formulário para editar um Status*/
     public function edit($id)
     {
         $status = Status::find($id);
@@ -79,13 +45,7 @@ class StatusController extends Controller
         return view('status.edit')->with('status', $status);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    /* Método para editar os dados*/
     public function update(Request $request, $id)
     {
         $request->validate($this->getRules());
@@ -93,6 +53,7 @@ class StatusController extends Controller
         $status = Status::find($id);
 
         $status->name = $request->input('name');
+        $status->color = $request->input('color');
         $status->description = $request->input('description');
 
         $status->save();
@@ -100,12 +61,7 @@ class StatusController extends Controller
         return redirect()->route('status.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    /* Método para deletar um Status */
     public function destroy($id)
     {
         $status = Status::find($id);
@@ -125,6 +81,7 @@ class StatusController extends Controller
     {
         $rules = [
             'name' => 'required|max:100',
+            'color' => 'required|max:100',
             'description' => 'required|max:400'
         ];
         return $rules;
@@ -133,8 +90,9 @@ class StatusController extends Controller
     public function getRulesMessages()
     {
         $msg = [
-            'name.*' => 'Digite o nome do estúdio! Permitido até 50 caracteres',
-            'description.*' => 'Digite o nome do estúdio! Permitido até 400 caracteres'
+            'name.*' => 'Digite o nome do status! Permitido até 100 caracteres',
+            'color.*' => 'Digite a cor do status! Permitido até 100 caracteres',
+            'description.*' => 'Digite a descrição do status! Permitido até 400 caracteres'
         ];
         return $msg;
     }

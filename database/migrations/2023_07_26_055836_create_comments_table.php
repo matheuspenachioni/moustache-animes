@@ -13,13 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('anime_user', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('anime_id')->constrained()->onDelete('cascade');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->integer('watched')->default(0);
-            $table->integer('rating')->default(0);
+            $table->unsignedBigInteger('anime_id');
+            $table->unsignedBigInteger('user_id');
+            $table->text('body');
             $table->timestamps();
+            $table->foreign('anime_id')->references('id')->on('animes')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('anime_user');
+        Schema::dropIfExists('comments');
     }
 };

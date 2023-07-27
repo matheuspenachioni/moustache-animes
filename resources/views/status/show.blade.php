@@ -1,14 +1,10 @@
 @extends('base')
 
 @section('content')
-    <div class=" row">
-        <div class="col-md-4 mx-auto">
-            <img src="{{ url("storage/{$studio->image}") }}" class="img-fluid rounded-start" alt="">
-        </div>
+    <div class="row">
         <div class="col">
-            <h2>{{ $studio->name }}</h2>
-            <p><strong>Description:</strong> {{ $studio->description }}</p>
-            <p><strong>Established:</strong> {{ $studio->established }}</p>
+            <h2>{{ $status->name }}</h2>
+            <p><strong>Description:</strong> {{ $status->description }}</p>
         </div>
     </div>
     <div class="row">

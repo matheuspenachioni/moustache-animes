@@ -13,7 +13,11 @@ Durante a faculdade, <a href="https://github.com/GabrielReguera">meu amigo</a> e
 - Ele pode escolher uma nota para o anime e marcar quantos episódios já assistiu
 - Ele pode acessar a página de informações do anime, deixar um comentário e/ou visualizar comentários de outros usuários
 
-<strong>Nota:</strong> Eu tentei realizar o deploy desta aplicação e infelizmente não consegui, mas em breve colocarei um vídeo demonstrando as funcionalidades!
+### Demonstração
+
+[![Watch the video](https://img.youtube.com/vi/_ITU7UVHDc0/maxresdefault.jpg)](https://youtu.be/_ITU7UVHDc0)
+
+<strong>Nota:</strong> Eu tentei realizar o deploy desta aplicação e infelizmente não consegui, clique para assistir!
 
 ### Sobre o Laravel
 
